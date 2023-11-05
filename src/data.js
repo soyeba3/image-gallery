@@ -1,7 +1,7 @@
 export const data = [
   {
     id: 1,
-    img: "/images/image-1.webp",
+    img: "/images/image-11.jpeg",
   },
   {
     id: 2,
@@ -41,6 +41,6 @@ export const data = [
   },
   {
     id: 11,
-    img: "/images/image-11.jpeg",
+    img: "/images/image-1.webp",
   },
 ];

@@ -4,6 +4,7 @@ import { data } from "./data";
 
 function App() {
   const [imageList, setImageList] = useState(data);
+  const [selectedItems, setSelectedItems] = useState([]);
 
   //save reference for dragItem and dragOverItem
   const dragItem = useRef(null);
@@ -28,24 +29,55 @@ function App() {
     setImageList(copiedImageList);
   };
 
+  //handle delete items
+  const handleDelete = () => {
+    const newImageList = imageList.filter((i) => !selectedItems.includes(i));
+    setImageList(newImageList);
+    setSelectedItems([]);
+  };
+
   return (
     <>
-      <div className="px-20 py-10 bg-slate-200">
+      <div className="min-h-screen px-20 py-10 bg-slate-200">
         <div className="bg-white rounded-md shadow-lg">
-          <div className="px-10 py-4 border-b border-gray-200">
-            <h1 className="text-lg font-bold">Gallery</h1>
+          <div className="flex justify-between items-center px-5 sm:px-10 py-4 border-b border-gray-200">
+            {selectedItems.length > 0 ? (
+              <>
+                <div className="text-xs sm:text-lg font-medium sm:font-bold flex gap-1 sm:gap-2 items-center">
+                  <input
+                    className="h-3 sm:h-4 w-3 sm:w-4"
+                    type="checkbox"
+                    checked
+                    readOnly
+                  />
+                  <span>{selectedItems.length} Files Selected</span>
+                </div>
+                <span
+                  onClick={handleDelete}
+                  className="text-xs sm:text-base font-medium text-red-500 cursor-pointer"
+                >
+                  Delete files
+                </span>
+              </>
+            ) : (
+              <h1 className="text-base sm:text-lg font-medium sm:font-bold">
+                Gallery
+              </h1>
+            )}
           </div>
-          <div className="grid grid-cols-5 gap-5 p-10">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-5 p-5 sm:p-10">
             {imageList.map((item, index) => (
               <ImageCard
                 onDragStart={() => (dragItem.current = index)}
                 onDragEnter={() => (dragOverItem.current = index)}
                 onDragEnd={handleSort}
+                selectedItems={selectedItems}
+                setSelectedItems={setSelectedItems}
                 key={item.id}
                 item={item}
               />
             ))}
-            <div className="flex flex-col items-center justify-center gap-2 border-2 border-gray-300 border-dashed rounded-md">
+            <div className="h-auto flex flex-col items-center justify-center gap-1 sm:gap-2 border-2 border-gray-300 border-dashed rounded-md py-[25%] sm:py-0">
               <div className="cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +85,7 @@ function App() {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-4 sm:w-6 h-4 sm:h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -62,7 +94,9 @@ function App() {
                   />
                 </svg>
               </div>
-              <div className="text-base font-semibold">Add Images</div>
+              <div className="text-xs sm:text-base font-normal sm:font-semibold">
+                Add Images
+              </div>
             </div>
           </div>
         </div>
