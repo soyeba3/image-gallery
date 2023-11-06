@@ -34,18 +34,23 @@ function ImageCard(props) {
       onDragOver={(e) => e.preventDefault()}
       onMouseOver={() => setVisible(true)}
       onMouseOut={() => setVisible(false)}
-      className="relative border border-gray-300 rounded-md hover:bg-gray-300 first:row-span-2 first:col-span-2"
+      className="relative border border-gray-300 rounded-md first:row-span-2 first:col-span-2"
     >
       <img className="rounded-md" src={item.img} alt="img" />
-      {visible || isChecked ? (
-        <input
-          className="absolute h-3 sm:h-4 w-3 sm:w-4 top-1 sm:top-4 left-1 sm:left-4"
-          type="checkbox"
-          onChange={handleInputChange}
-        />
-      ) : (
-        ""
-      )}
+
+      <div
+        className={`absolute h-full w-full top-0 left-0 right-0 bottom-0 transition ${
+          isChecked && "bg-[#1312121a] hover:bg-[#1312121a]"
+        } hover:bg-[#13121252] cursor-pointer rounded-md`}
+      >
+        {(visible || isChecked) && (
+          <input
+            className="absolute h-3 sm:h-4 w-3 sm:w-4 top-1 sm:top-3 md:top-4 left-1 sm:left-3 md:left-4"
+            type="checkbox"
+            onChange={handleInputChange}
+          />
+        )}
+      </div>
     </div>
   );
 }

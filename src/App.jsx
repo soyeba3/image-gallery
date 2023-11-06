@@ -54,7 +54,7 @@ function App() {
                 </div>
                 <span
                   onClick={handleDelete}
-                  className="text-xs sm:text-base font-medium text-red-500 cursor-pointer"
+                  className="text-xs sm:text-base font-medium text-red-500 cursor-pointer hover:underline"
                 >
                   Delete files
                 </span>
@@ -65,7 +65,7 @@ function App() {
               </h1>
             )}
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-5 p-5 sm:p-10">
+          <div className="min-h-screen grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-5 p-5 sm:p-10">
             {imageList.map((item, index) => (
               <ImageCard
                 onDragStart={() => (dragItem.current = index)}
