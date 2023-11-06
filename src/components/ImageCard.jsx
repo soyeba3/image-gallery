@@ -22,7 +22,7 @@ function ImageCard(props) {
     <div
       onMouseOver={() => setVisible(true)}
       onMouseOut={() => setVisible(false)}
-      className="relative border border-gray-300 rounded-md first:row-span-2 first:col-span-2"
+      className="min-h-[100px] relative border border-gray-300 rounded-md first:row-span-2 first:col-span-2"
     >
       <img className="rounded-md" src={item.img} alt="img" />
 
